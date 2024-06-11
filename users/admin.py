@@ -4,6 +4,7 @@ from .models import User
 from .forms import UserChangeForm, UserCreationForm
 from .filters import RoleFilter
 
+
 class CustomUserAdmin(UserAdmin):
     list_filter = UserAdmin.list_filter + (RoleFilter,)
     form = UserChangeForm
