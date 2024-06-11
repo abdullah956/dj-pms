@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from .managers import UserManager
 from config.models import BasedModel
 
-class User(AbstractUser,BasedModel):
+class User(AbstractUser, BasedModel):
     LANDLORD = 1
     TENANT = 2
 
