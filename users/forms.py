@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from .models import User
 
-#modifing admin forms due to abstract user
+
 class UserChangeForm(UserChangeForm):
     class Meta:
         model = User
