@@ -27,3 +27,4 @@ class UserCreationForm(UserCreationForm):
         if username and User.objects.filter(username=username).exists():
             raise forms.ValidationError("A user with that username already exists.")
         return username
+    
