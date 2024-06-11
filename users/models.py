@@ -13,9 +13,9 @@ class User(AbstractUser, BasedModel):
     ]
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=150, blank=True, null=True)
-    role = models.PositiveSmallIntegerField(choices=USER_ROLES, null=True, blank=True)
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    role=models.PositiveSmallIntegerField(choices=USER_ROLES,null=True,blank=True)
+    USERNAME_FIELD='email'
+    REQUIRED_FIELDS=[]
 
     objects = UserManager()
 
