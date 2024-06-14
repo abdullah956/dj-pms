@@ -48,7 +48,7 @@ class UserLogoutView(LogoutView):
     next_page = reverse_lazy('login')
     
     def dispatch(self, request, *args, **kwargs):
-        logger.info(f'User {request.user.username} logged out')
+        logger.info(f'User {request.user.email} logged out')
         return super().dispatch(request, *args, **kwargs)
         
 class LandlordDashboardView(TemplateView):
