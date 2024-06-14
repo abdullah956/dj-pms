@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      {% block title %}
+        User Management
+      {% endblock %}
+    </title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'password_reset' %}">Forgot Password</a>
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+          {% csrf_token %}
+          <a href type="submit">Logout</a>
+        </form>
+      </nav>
+    </header>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+  </body>
+</html>
