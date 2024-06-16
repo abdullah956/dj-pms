@@ -1,21 +1,24 @@
-from django.urls import reverse_lazy
-from django.shortcuts import redirect
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import update_session_auth_hash
-from django.contrib import messages
-from django.views.generic import CreateView, TemplateView, FormView, UpdateView
-from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView , PasswordResetConfirmView , PasswordResetCompleteView
-from django.contrib.auth import login
-from .forms import (
-    UserRegistrationForm, UserLoginForm, CustomPasswordResetForm, CustomSetPasswordForm,
-    UserProfileForm, ProfilePasswordChangeForm
-)
-from .models import User
 import logging
 
+from django.contrib import messages
+from django.contrib.auth import login, update_session_auth_hash
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import (LoginView, LogoutView,
+                                       PasswordResetCompleteView,
+                                       PasswordResetConfirmView,
+                                       PasswordResetView)
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, FormView, TemplateView, UpdateView
+
+from .forms import (CustomPasswordResetForm, CustomSetPasswordForm,
+                    ProfilePasswordChangeForm, UserLoginForm, UserProfileForm,
+                    UserRegistrationForm)
+from .models import User
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
+
 
 class UserRegisterView(CreateView):
     model = User
@@ -24,7 +27,7 @@ class UserRegisterView(CreateView):
     success_url = reverse_lazy('landlord_dashboard')
 
     def form_valid(self, form):
-        #super().form_valid(form)
+        # super().form_valid(form)
         logger.info('Form is valid in UserRegisterView')
         user = form.save()
         login(self.request, user)
@@ -35,7 +38,8 @@ class UserRegisterView(CreateView):
         else:
             logger.info('Redirecting to tenant dashboard')
             return redirect('tenant_dashboard')
-        
+
+
 class UserLoginView(LoginView):
     form_class = UserLoginForm
     template_name = 'users/login.html'
@@ -52,11 +56,12 @@ class UserLoginView(LoginView):
 
 class UserLogoutView(LogoutView):
     next_page = reverse_lazy('login')
-    
+
     def dispatch(self, request, *args, **kwargs):
         logger.info(f'User {request.user.email} logged out')
         return super().dispatch(request, *args, **kwargs)
-        
+
+
 class LandlordDashboardView(TemplateView):
     template_name = 'dashboard/landlord_dashboard.html'
 
@@ -64,11 +69,13 @@ class LandlordDashboardView(TemplateView):
 class TenantDashboardView(TemplateView):
     template_name = 'dashboard/tenant_dashboard.html'
 
+
 class CustomPasswordResetView(PasswordResetView):
     template_name = 'users/password_reset.html'
     email_template_name = 'users/password_reset_email.html'
     success_url = reverse_lazy('password_reset_done')
     form_class = CustomPasswordResetForm
+
 
 class CustomPasswordResetConfirmView(PasswordResetConfirmView):
     template_name = 'users/password_reset_confirm.html'
@@ -78,8 +85,6 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
 
 class CustomPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = 'users/password_reset_complete.html'
-
-
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):

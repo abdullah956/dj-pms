@@ -1,10 +1,11 @@
-from django.views.generic import TemplateView
 import logging
-from django.http import HttpResponse
 
+from django.http import HttpResponse
+from django.views.generic import TemplateView
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
+
 
 class HomePageView(TemplateView):
     template_name = 'home.html'

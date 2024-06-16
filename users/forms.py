@@ -1,11 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import (
-    UserChangeForm, UserCreationForm,
-    AuthenticationForm,
-    PasswordResetForm,
-    SetPasswordForm,
-    PasswordChangeForm
-)
+from django.contrib.auth.forms import (AuthenticationForm, PasswordChangeForm,
+                                       PasswordResetForm, SetPasswordForm,
+                                       UserChangeForm, UserCreationForm)
+
 from .models import User
 
 
@@ -34,17 +31,21 @@ class UserCreationForm(UserCreationForm):
             raise forms.ValidationError("A user with that username already exists.")
         return username
 
+
 class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['email', 'role', 'password1', 'password2']
 
+
 class UserLoginForm(AuthenticationForm):
     username = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
 
 # Used for forget password
 class CustomPasswordResetForm(PasswordResetForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
 
 # Used for forget password
 class CustomSetPasswordForm(SetPasswordForm):
