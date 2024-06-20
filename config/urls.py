@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('', HomePageView.as_view(), name='home'),
+    path('property/', include('properties.urls')),
     path('logging/', LoggingExampleView, name='home'),
 ]
 
