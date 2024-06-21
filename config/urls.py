@@ -1,14 +1,15 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, reverse_lazy
+from django.views.generic import RedirectView
 
-from .views import HomePageView, LoggingExampleView
+from .views import LoggingExampleView
 
 urlpatterns = [
+    path('', RedirectView.as_view(url=reverse_lazy('login'), permanent=True), name='home'),
     path('admin/', admin.site.urls),
-    path('users/', include('users.urls')),
-    path('', HomePageView.as_view(), name='home'),
+    path('user/', include('users.urls')),
     path('property/', include('properties.urls')),
     path('logging/', LoggingExampleView, name='home'),
 ]
