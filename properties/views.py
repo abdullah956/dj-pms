@@ -15,6 +15,7 @@ from .models import City, Property, State, SubLocality, Unit
 class PropertyListView(LoginRequiredMixin, ListView):
     model = Property
     template_name = 'properties/property_list.html'
+    paginate_by = 1
 
     def get_queryset(self):
         return Property.objects.filter(owner=self.request.user)
@@ -24,6 +25,7 @@ class UnitListView(ListView):
     model = Unit
     template_name = 'unit_list.html'
     context_object_name = 'units'
+    paginate_by = 10
 
 
 class PropertyDetailView(LoginRequiredMixin, DetailView):
@@ -55,6 +57,7 @@ class LeasedPropertyListView(ListView):
     model = Property
     template_name = 'properties/leased_property_list.html'
     context_object_name = 'properties'
+    paginate_by = 10
 
     def get_queryset(self):
         return Property.objects.filter(is_leased=True)
