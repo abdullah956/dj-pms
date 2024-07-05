@@ -51,6 +51,15 @@ class UnitDetailView(DetailView):
         return context
 
 
+class LeasedPropertyListView(ListView):
+    model = Property
+    template_name = 'properties/leased_property_list.html'
+    context_object_name = 'properties'
+
+    def get_queryset(self):
+        return Property.objects.filter(is_leased=True)
+
+
 class PropertyCreateView(LoginRequiredMixin, CreateView):
     model = Property
     form_class = PropertyForm

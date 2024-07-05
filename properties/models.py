@@ -49,6 +49,7 @@ class Property(BasedModel):
     square_feet = models.PositiveIntegerField()
     is_leased = models.BooleanField(default=False)
     images = GenericRelation('gallery.Image')
+    is_leased = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

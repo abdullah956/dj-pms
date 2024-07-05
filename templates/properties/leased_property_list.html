@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}
+    Leased Properties
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Leased Properties</h1>
+                {% if properties %}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Owner</th>
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Country</th>
+                                <th>Square Feet</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for property in properties %}
+                                <tr>
+                                    <td>{{ property.name }}</td>
+                                    <td>{{ property.owner }}</td>
+                                    <td>{{ property.address }}</td>
+                                    <td>{{ property.city.name }}</td>
+                                    <td>{{ property.state.name }}</td>
+                                    <td>{{ property.country.name }}</td>
+                                    <td>{{ property.square_feet }}</td>
+                                    <td>{{ property.description }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No leased properties found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
