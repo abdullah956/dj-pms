@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block title %}
+    Property Detail
+{% endblock title %}
 {% block content %}
     <h2>{{ property.name }} Details</h2>
     <div class="row">
@@ -86,7 +89,9 @@
                     {% for unit in units %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ unit.unit_number }}</td>
+                            <td>
+                                <a href="{% url 'unit_detail' unit.pk %}">{{ unit.unit_number }}</a>
+                            </td>
                             <td>{{ unit.description }}</td>
                             <td>{{ unit.num_beds }}</td>
                             <td>{{ unit.num_bathrooms }}</td>
