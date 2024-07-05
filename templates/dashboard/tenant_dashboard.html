@@ -3,5 +3,13 @@
     Tenant Dashboard
 {% endblock title %}
 {% block content %}
-    <a href="{% url 'available_units' %}">Available for rent</a>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Tenant Dashboard</h2>
+                <p class="card-text">Explore available units:</p>
+                <a href="{% url 'available_units' %}" class="btn btn-primary">Available Units</a>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

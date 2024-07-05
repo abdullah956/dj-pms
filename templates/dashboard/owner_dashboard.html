@@ -3,5 +3,98 @@
     Owner Dashboard
 {% endblock title %}
 {% block content %}
-    <a href="{% url 'property_list' %}">List Properties</a>
+    <a href="{% url 'property_list' %}" class="btn btn-primary mb-3">List Properties</a>
+    <h2>Summary</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Total Properties</th>
+                <th>Total Units</th>
+                <th>Total Tenants</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ total_properties }}</td>
+                <td>{{ total_units }}</td>
+                <td>{{ total_tenants }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% comment %} <h2>Properties</h2>
+    <a href="{% url 'property_create' %}" class="btn btn-success mb-3">Add Property</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Sub Locality</th>
+                <th>Address</th>
+                <th>Square Feet</th>
+                <th>Is Leased</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for property in properties %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url 'property_detail' property.pk %}">{{ property.name }}</a></td>
+                    <td>{{ property.country.name }}</td>
+                    <td>{{ property.state.name }}</td>
+                    <td>{{ property.city.name }}</td>
+                    <td>{{ property.sub_locality.name }}</td>
+                    <td>{{ property.address }}</td>
+                    <td>{{ property.square_feet }}</td>
+                    <td>{{ property.is_leased }}</td>
+                    <td>
+                        <a href="{% url 'property_update' property.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'property_delete' property.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Units</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Property</th>
+                <th>Unit Number</th>
+                <th>Description</th>
+                <th>Beds</th>
+                <th>Bathrooms</th>
+                <th>Kitchens</th>
+                <th>Living Rooms</th>
+                <th>Stores</th>
+                <th>Is Available for Rent</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for unit in units %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ unit.property.name }}</td>
+                    <td><a href="{% url 'unit_detail' unit.pk %}">{{ unit.unit_number }}</a></td>
+                    <td>{{ unit.description }}</td>
+                    <td>{{ unit.num_beds }}</td>
+                    <td>{{ unit.num_bathrooms }}</td>
+                    <td>{{ unit.num_kitchens }}</td>
+                    <td>{{ unit.num_living_rooms }}</td>
+                    <td>{{ unit.num_stores }}</td>
+                    <td>{{ unit.is_available_for_rent }}</td>
+                    <td>
+                        <a href="{% url 'unit_update' unit.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'unit_delete' unit.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table> {% endcomment %}
 {% endblock content %}

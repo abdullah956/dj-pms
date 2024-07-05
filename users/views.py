@@ -11,6 +11,8 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, FormView, TemplateView, UpdateView
 
+from properties.models import Property, Unit  # type: ignore
+
 from .forms import (CustomPasswordResetForm, CustomSetPasswordForm,
                     ProfilePasswordChangeForm, UserLoginForm, UserProfileForm,
                     UserRegistrationForm)
@@ -72,6 +74,21 @@ class UserLogoutView(LogoutView):
 
 class OwnerDashboardView(TemplateView):
     template_name = 'dashboard/owner_dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        properties = Property.objects.filter(owner=self.request.user)
+        units = Unit.objects.filter(property__owner=self.request.user)
+
+        context['properties'] = properties
+        context['units'] = units
+
+        context['total_properties'] = Property.objects.count()
+        context['total_units'] = Unit.objects.count()
+        context['total_tenants'] = User.objects.filter(role=User.TENANT).count()
+
+        return context
 
 
 class TenantDashboardView(TemplateView):

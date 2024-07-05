@@ -27,6 +27,12 @@ class PropertyDetailView(LoginRequiredMixin, DetailView):
     def get_queryset(self):
         return Property.objects.filter(owner=self.request.user)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        property = self.get_object()
+        context['units'] = property.units.all()
+        return context
+
 
 class UnitDetailView(DetailView):
     model = Unit
