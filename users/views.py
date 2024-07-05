@@ -9,7 +9,8 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordResetView)
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, FormView, TemplateView, UpdateView
+from django.views.generic import (CreateView, DetailView, FormView,
+                                  TemplateView, UpdateView)
 
 from properties.models import Property, Unit  # type: ignore
 
@@ -141,3 +142,12 @@ class PasswordChangeView(LoginRequiredMixin, FormView):
         update_session_auth_hash(self.request, user)
         messages.success(self.request, 'Your password has been changed successfully.')
         return super().form_valid(form)
+
+
+class ProfileView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'users/profile.html'
+    context_object_name = 'user'
+
+    def get_object(self, queryset=None):
+        return self.request.user

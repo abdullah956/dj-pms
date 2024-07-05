@@ -58,38 +58,40 @@
                 <aside id="sidebar" class="expand">
                     <ul class="sidebar-nav">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">
+                            <a href="{% url 'user_profile' %}" class="sidebar-link">
                                 <i class="lni lni-user"></i>
                                 <span>Profile</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">
-                                <i class="lni lni-agenda"></i>
-                                <span>Task</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#"
-                               class="sidebar-link collapsed has-dropdown"
-                               data-bs-toggle="collapse"
-                               data-bs-target="#auth"
-                               aria-expanded="false"
-                               aria-controls="auth">
-                                <i class="lni lni-protection"></i>
-                                <span>Auth</span>
-                            </a>
-                            <ul id="auth"
-                                class="sidebar-dropdown list-unstyled collapse"
-                                data-bs-parent="#sidebar">
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Login</a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Register</a>
-                                </li>
-                            </ul>
-                        </li>
+                        {% if user.role == user.OWNER %}
+                            <li class="sidebar-item">
+                                <a href="#"
+                                   class="sidebar-link collapsed has-dropdown"
+                                   data-bs-toggle="collapse"
+                                   data-bs-target="#auth"
+                                   aria-expanded="false"
+                                   aria-controls="auth">
+                                    <i class="lni lni-apartment"></i>
+                                    <span>Properties</span>
+                                </a>
+                                <ul id="auth"
+                                    class="sidebar-dropdown list-unstyled collapse"
+                                    data-bs-parent="#sidebar">
+                                    <li class="sidebar-item">
+                                        <a href="#" class="sidebar-link">All Properties</a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a href="#" class="sidebar-link">All Units</a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a href="#" class="sidebar-link">Owned Properties</a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a href="#" class="sidebar-link">Leased Properties</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% endif %}
                         <li class="sidebar-item">
                             <a href="#"
                                class="sidebar-link collapsed has-dropdown"
