@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}
+    All Units
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>All Units</h1>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Unit Number</th>
+                            <th>Property</th>
+                            <th>Description</th>
+                            <th>Beds</th>
+                            <th>Bathrooms</th>
+                            <th>Kitchens</th>
+                            <th>Living Rooms</th>
+                            <th>Stores</th>
+                            <th>Available for Rent</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for unit in units %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'property_detail' pk=unit.property.pk %}">{{ unit.unit_number }}</a>
+                                </td>
+                                <td>{{ unit.property.name }}</td>
+                                <td>{{ unit.description }}</td>
+                                <td>{{ unit.num_beds }}</td>
+                                <td>{{ unit.num_bathrooms }}</td>
+                                <td>{{ unit.num_kitchens }}</td>
+                                <td>{{ unit.num_living_rooms }}</td>
+                                <td>{{ unit.num_stores }}</td>
+                                <td>{{ unit.is_available_for_rent|yesno:"Yes,No" }}</td>
+                                <td>
+                                    <a href="{% url 'unit_update' pk=unit.pk %}"
+                                       class="btn btn-sm btn-warning">Edit</a>
+                                    <a href="{% url 'unit_delete' pk=unit.pk %}"
+                                       class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

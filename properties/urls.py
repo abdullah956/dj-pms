@@ -3,7 +3,7 @@ from django.urls import path
 from .views import (AvailableUnitsView, PropertyCreateView, PropertyDeleteView,
                     PropertyDetailView, PropertyListView, PropertyUpdateView,
                     UnitCreateView, UnitDeleteView, UnitDetailView,
-                    UnitUpdateView, load_cities, load_states,
+                    UnitListView, UnitUpdateView, load_cities, load_states,
                     load_sub_localities)
 
 urlpatterns = [
@@ -16,6 +16,7 @@ urlpatterns = [
     path('unit/<int:pk>/update/', UnitUpdateView.as_view(), name='unit_update'),
     path('unit/<int:pk>/delete/', UnitDeleteView.as_view(), name='unit_delete'),
     path('unit/<int:pk>/', UnitDetailView.as_view(), name='unit_detail'),
+    path('units/', UnitListView.as_view(), name='unit_list'),
     path('available-units/', AvailableUnitsView.as_view(), name='available_units'),
     path('ajax/load-states/', load_states, name='ajax_load_states'),
     path('ajax/load-cities/', load_cities, name='ajax_load_cities'),

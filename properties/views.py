@@ -20,6 +20,12 @@ class PropertyListView(LoginRequiredMixin, ListView):
         return Property.objects.filter(owner=self.request.user)
 
 
+class UnitListView(ListView):
+    model = Unit
+    template_name = 'unit_list.html'
+    context_object_name = 'units'
+
+
 class PropertyDetailView(LoginRequiredMixin, DetailView):
     model = Property
     template_name = 'properties/property_detail.html'
