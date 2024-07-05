@@ -66,6 +66,16 @@ class LeasedPropertyListView(ListView):
         return Property.objects.filter(is_leased=True).order_by('id')
 
 
+class OwnedPropertyListView(ListView):
+    model = Property
+    template_name = 'properties/owned_property_list.html'
+    context_object_name = 'properties'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Property.objects.filter(is_leased=False).order_by('id')
+
+
 class PropertyCreateView(LoginRequiredMixin, CreateView):
     model = Property
     form_class = PropertyForm

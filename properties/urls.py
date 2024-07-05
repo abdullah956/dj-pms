@@ -1,11 +1,11 @@
 from django.urls import path
 
 from .views import (AvailableUnitsView, LeasedPropertyListView,
-                    PropertyCreateView, PropertyDeleteView, PropertyDetailView,
-                    PropertyListView, PropertyUpdateView, UnitCreateView,
-                    UnitDeleteView, UnitDetailView, UnitListView,
-                    UnitUpdateView, load_cities, load_states,
-                    load_sub_localities)
+                    OwnedPropertyListView, PropertyCreateView,
+                    PropertyDeleteView, PropertyDetailView, PropertyListView,
+                    PropertyUpdateView, UnitCreateView, UnitDeleteView,
+                    UnitDetailView, UnitListView, UnitUpdateView, load_cities,
+                    load_states, load_sub_localities)
 
 urlpatterns = [
     path('', PropertyListView.as_view(), name='property_list'),
@@ -14,6 +14,7 @@ urlpatterns = [
     path('<int:pk>/update/', PropertyUpdateView.as_view(), name='property_update'),
     path('<int:pk>/delete/', PropertyDeleteView.as_view(), name='property_delete'),
     path('leased/', LeasedPropertyListView.as_view(), name='leased_property_list'),
+    path('owned/', OwnedPropertyListView.as_view(), name='owned_property_list'),
     path('<int:property_pk>/unit/create/', UnitCreateView.as_view(), name='unit_create'),
     path('unit/<int:pk>/update/', UnitUpdateView.as_view(), name='unit_update'),
     path('unit/<int:pk>/delete/', UnitDeleteView.as_view(), name='unit_delete'),
