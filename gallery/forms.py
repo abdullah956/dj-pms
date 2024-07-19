@@ -11,3 +11,5 @@ class ImageForm(forms.ModelForm):
 
 
 ImageFormSet = modelformset_factory(Image, form=ImageForm, extra=3)
+
+DocFormSet = modelformset_factory(Image, form=ImageForm, extra=0, max_num=2, min_num=2)
