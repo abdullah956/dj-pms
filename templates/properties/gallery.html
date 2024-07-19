@@ -1,13 +1,22 @@
-<div class="pswp-gallery" id="my-gallery">
-    {% for image in unit.images.all %}
-        <a href="{{ image.image.url }}"
-           data-pswp-width="{{ image.image.width }}"
-           data-pswp-height="{{ image.image.height }}"
-           target="_blank">
-            <img src="{{ image.image.url }}"
-                 alt=""
-                 width="{{ image.image.width }}"
-                 height="{{ image.image.height }}" />
-        </a>
-    {% endfor %}
-</div>
+<a href="{{ image.image.url }}"
+   data-pswp-width="{{ image.image.width }}"
+   data-pswp-height="{{ image.image.height }}"
+   target="_blank">
+    <img src="{{ image.image.url }}"
+         alt=""
+         width="{{ image.image.width }}"
+         height="{{ image.image.height }}"
+         class="pswp-gallery-image" />
+</a>
+<style>
+  .pswp-gallery-image {
+    width: 100%;  /* Default width for all images */
+  }
+  /* Media queries for responsive scaling */
+  @media (min-width: 768px) {  /* Adjust breakpoint as needed */
+    .pswp-gallery-image {
+      width: auto;  /* Allow width to adjust for landscape images */
+      max-height: 150px;  /* Set a maximum height for portrait on larger screens */
+    }
+  }
+</style>
