@@ -87,3 +87,23 @@ class TenantUnitFilterForm(forms.Form):
                 self.fields['sub_locality'].queryset = SubLocality.objects.filter(city_id=city_id).order_by('name')
             except (ValueError, TypeError):
                 pass
+
+
+class TableUnitFilterForm(forms.Form):
+    property = forms.ModelChoiceField(queryset=Property.objects.all(), required=False, empty_label="All Properties")
+    unit = forms.ModelChoiceField(queryset=Unit.objects.none(), required=False, empty_label="All Units")
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super(TableUnitFilterForm, self).__init__(*args, **kwargs)
+        if user:
+            self.fields['property'].queryset = Property.objects.filter(owner=user)
+
+        if 'property' in self.data:
+            try:
+                property_id = int(self.data.get('property'))
+                units = Unit.objects.filter(property_id=property_id)
+                self.fields['unit'].queryset = units
+                self.fields['unit'].choices = [("", "All Units")] + [(unit.id, unit.unit_number) for unit in units]
+            except (ValueError, TypeError):
+                pass

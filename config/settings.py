@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'users',
     'properties',
     'gallery',
+    'contracts',
 ]
 
 MIDDLEWARE = [
