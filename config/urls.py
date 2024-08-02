@@ -11,6 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('users.urls')),
     path('property/', include('properties.urls')),
+    path('contract/', include('contracts.urls')),
     path('logging/', LoggingExampleView, name='home'),
 ]
 
