@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import TenancyContract
+from .models import Message, TenancyContract
 
 
 class DateInput(forms.DateInput):
@@ -26,3 +26,12 @@ class TenancyContractForm(forms.ModelForm):
             raise forms.ValidationError("End date should be greater than start date.")
 
         return cleaned_data
+
+
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Type your message here...'}),
+        }
